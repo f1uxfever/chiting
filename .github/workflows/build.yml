@@ -14,25 +14,26 @@ jobs:
           java-version: '8'
           distribution: 'temurin'
       
-      - name: Compile Java files
+      - name: Find and compile Java files
         run: |
           mkdir -p build/classes
-          javac -d build/classes -encoding UTF-8 \
-            src/main/java/net/cheatmenu/*.java \
-            src/main/java/net/cheatmenu/module/*.java \
-            src/main/java/net/cheatmenu/module/modules/*.java \
-            src/main/java/net/cheatmenu/ui/*.java
+          find src -name "*.java" -type f > /tmp/sources.txt
+          if [ -s /tmp/sources.txt ]; then
+            javac -d build/classes -encoding UTF-8 @/tmp/sources.txt
+          fi
       
       - name: Create JAR
         run: |
           mkdir -p build/libs
-          cd build/classes
-          jar -cvf ../libs/cheatmenu-1.0.0.jar .
-          cd ../..
-          cp src/main/resources/fabric.mod.json build/libs/
+          if [ -d build/classes ]; then
+            cd build/classes
+            jar -cvf ../libs/cheatmenu-1.0.0.jar .
+            cd ../..
+          fi
       
       - name: Upload JAR
         uses: actions/upload-artifact@v4
         with:
           name: cheatmenu-1.0.0.jar
           path: build/libs/cheatmenu-1.0.0.jar
+        if: always()
