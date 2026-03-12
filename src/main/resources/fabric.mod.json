@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "cheatmenu",
+  "version": "${version}",
+  "name": "Cheat Menu",
+  "description": "Advanced ClickGUI cheat menu for Minecraft",
+  "authors": [
+    "CheatMenu"
+  ],
+  "contact": {
+    "website": "https://fabricmc.net",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "net.cheatmenu.CheatMenuMod"
+    ]
+  },
+  "mixins": [
+  ],
+  "depends": {
+    "fabricloader": ">=0.12.0",
+    "fabric": "*",
+    "minecraft": "1.16.5"
+  }
+}
