@@ -2,19 +2,19 @@ package net.cheatmenu.module.modules;
 
 import net.cheatmenu.module.Module;
 
-public class AutoFish extends Module {
-    public AutoFish() {
-        super("AutoFish", "Misc");
+public class AutoClicker extends Module {
+    public AutoClicker() {
+        super("AutoClicker", "Combat");
     }
 
     @Override
     public void onEnable() {
-        System.out.println("AutoFish enabled");
+        System.out.println("AutoClicker enabled");
     }
 
     @Override
     public void onDisable() {
-        System.out.println("AutoFish disabled");
+        System.out.println("AutoClicker disabled");
     }
 
     @Override
