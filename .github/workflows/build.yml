@@ -12,10 +12,24 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '8'
-          distribution: 'adopt'
+          distribution: 'temurin'
       
-      - name: Build with Gradle
-        run: chmod +x gradlew && ./gradlew build
+      - name: Compile Java files
+        run: |
+          mkdir -p build/classes
+          javac -d build/classes -encoding UTF-8 \
+            src/main/java/net/cheatmenu/*.java \
+            src/main/java/net/cheatmenu/module/*.java \
+            src/main/java/net/cheatmenu/module/modules/*.java \
+            src/main/java/net/cheatmenu/ui/*.java
+      
+      - name: Create JAR
+        run: |
+          mkdir -p build/libs
+          cd build/classes
+          jar -cvf ../libs/cheatmenu-1.0.0.jar .
+          cd ../..
+          cp src/main/resources/fabric.mod.json build/libs/
       
       - name: Upload JAR
         uses: actions/upload-artifact@v4
